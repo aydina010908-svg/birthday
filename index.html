@@ -1,0 +1,4858 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Aidina's 18th Birthday</title>
+
+    <!-- =====================================================
+     FONTS
+===================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Parisienne&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =====================================================
+   RESET
+===================================================== */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: #fffdfd;
+
+        color: #171515;
+
+        font-family: "DM Sans", sans-serif;
+
+        overflow-x: hidden;
+      }
+
+      button {
+        font-family: inherit;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      /* =====================================================
+   COLORS
+===================================================== */
+
+      :root {
+        --pink: #d889a0;
+
+        --pink-light: #f3d3dc;
+
+        --pink-soft: #f9edf1;
+
+        --pink-dark: #b86e84;
+
+        --dark: #171515;
+
+        --gray: #777;
+      }
+
+      /* =====================================================
+   PAGE LOADER
+===================================================== */
+
+      .page-loader {
+        position: fixed;
+
+        inset: 0;
+
+        z-index: 99999;
+
+        background: #fffdfd;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        transition:
+          opacity 1s cubic-bezier(0.77, 0, 0.18, 1),
+          visibility 1s;
+      }
+
+      .page-loader.hide {
+        opacity: 0;
+
+        visibility: hidden;
+
+        pointer-events: none;
+      }
+
+      .loader-content {
+        text-align: center;
+      }
+
+      .loader-number {
+        font-family: "Playfair Display", serif;
+
+        font-size: 100px;
+
+        line-height: 1.15;
+
+        padding-bottom: 6px;
+
+        color: #171515;
+
+        opacity: 0;
+
+        animation: loaderNumber 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .loader-line {
+        width: 0;
+
+        height: 1px;
+
+        background: var(--pink);
+
+        margin: 22px auto;
+
+        animation: loaderLine 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+      }
+
+      .loader-text {
+        font-size: 8px;
+
+        letter-spacing: 4px;
+
+        color: #999;
+
+        opacity: 0;
+
+        animation: loaderText 0.8s ease 0.6s forwards;
+      }
+
+      @keyframes loaderNumber {
+        from {
+          opacity: 0;
+
+          transform: translateY(25px) scale(0.8);
+
+          filter: blur(10px);
+        }
+
+        to {
+          opacity: 1;
+
+          transform: translateY(0) scale(1);
+
+          filter: blur(0);
+        }
+      }
+
+      @keyframes loaderLine {
+        to {
+          width: 90px;
+        }
+      }
+
+      @keyframes loaderText {
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* =====================================================
+   PAGE TRANSITION
+===================================================== */
+
+      .transition-screen {
+        position: fixed;
+
+        inset: 0;
+
+        z-index: 99990;
+
+        pointer-events: none;
+
+        background: var(--pink-light);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        clip-path: circle(0% at 50% 50%);
+
+        transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.18, 1);
+      }
+
+      .transition-screen.active {
+        clip-path: circle(150% at 50% 50%);
+      }
+
+      .transition-circle {
+        width: 110px;
+
+        height: 110px;
+
+        border-radius: 50%;
+
+        border: 1px solid rgba(255, 255, 255, 0.8);
+
+        opacity: 0;
+
+        transform: scale(0.5);
+
+        transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .transition-screen.active .transition-circle {
+        opacity: 1;
+
+        transform: scale(1.8);
+      }
+
+      /* =====================================================
+   FLOATING PARTICLES
+===================================================== */
+
+      .particles {
+        position: fixed;
+
+        inset: 0;
+
+        pointer-events: none;
+
+        z-index: 5;
+
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+
+        width: 3px;
+
+        height: 3px;
+
+        border-radius: 50%;
+
+        background: #e6a6b7;
+
+        opacity: 0;
+
+        animation: particleFloat linear infinite;
+      }
+
+      @keyframes particleFloat {
+        0% {
+          opacity: 0;
+
+          transform: translateY(30px) scale(0.5);
+        }
+
+        15% {
+          opacity: 0.45;
+        }
+
+        85% {
+          opacity: 0.2;
+        }
+
+        100% {
+          opacity: 0;
+
+          transform: translateY(-100vh) scale(1);
+        }
+      }
+
+      /* =====================================================
+   BOWS
+===================================================== */
+
+      .bows {
+        position: absolute;
+
+        inset: 0;
+
+        pointer-events: none;
+
+        overflow: hidden;
+
+        z-index: 0;
+      }
+
+      .bow {
+        position: absolute;
+
+        width: 34px;
+
+        height: 30px;
+
+        opacity: 0.5;
+
+        animation: bowFloat 6s ease-in-out infinite;
+      }
+
+      .bow::before,
+      .bow::after {
+        content: "";
+
+        position: absolute;
+
+        width: 14px;
+
+        height: 14px;
+
+        top: 2px;
+
+        background: #eab9c9;
+
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+      }
+
+      .bow::before {
+        left: 3px;
+
+        border-radius: 50% 50% 50% 3px;
+
+        transform: rotate(-45deg);
+      }
+
+      .bow::after {
+        right: 3px;
+
+        border-radius: 50% 50% 3px 50%;
+
+        transform: rotate(45deg);
+      }
+
+      .bow i {
+        position: absolute;
+
+        width: 7px;
+
+        height: 7px;
+
+        background: #d98aa4;
+
+        border-radius: 50%;
+
+        left: 50%;
+
+        top: 6px;
+
+        transform: translateX(-50%);
+
+        z-index: 3;
+      }
+
+      .bow span {
+        position: absolute;
+
+        width: 5px;
+
+        height: 15px;
+
+        background: #eab9c9;
+
+        top: 13px;
+
+        z-index: 1;
+      }
+
+      .bow span:first-child {
+        left: 13px;
+
+        transform: rotate(14deg);
+
+        clip-path: polygon(0 0, 100% 0, 75% 100%, 25% 100%);
+      }
+
+      .bow span:last-child {
+        right: 13px;
+
+        transform: rotate(-14deg);
+
+        clip-path: polygon(0 0, 100% 0, 75% 100%, 25% 100%);
+      }
+
+      .b1 {
+        top: 8%;
+
+        left: 8%;
+
+        transform: rotate(-10deg);
+      }
+
+      .b2 {
+        top: 15%;
+
+        right: 8%;
+
+        animation-delay: -1.5s;
+      }
+
+      .b3 {
+        top: 34%;
+
+        left: 5%;
+
+        transform: scale(0.85);
+
+        animation-delay: -3s;
+      }
+
+      .b4 {
+        top: 42%;
+
+        right: 5%;
+
+        transform: scale(0.9);
+
+        animation-delay: -4.5s;
+      }
+
+      .b5 {
+        top: 65%;
+
+        left: 9%;
+
+        animation-delay: -2s;
+      }
+
+      .b6 {
+        top: 72%;
+
+        right: 9%;
+
+        transform: scale(0.85);
+
+        animation-delay: -5s;
+      }
+
+      .b7 {
+        bottom: 8%;
+
+        left: 25%;
+
+        transform: scale(0.75);
+
+        animation-delay: -1s;
+      }
+
+      .b8 {
+        bottom: 6%;
+
+        right: 25%;
+
+        transform: scale(0.8);
+
+        animation-delay: -3.5s;
+      }
+
+      .b9 {
+        top: 25%;
+
+        left: 45%;
+
+        transform: scale(0.65);
+
+        opacity: 0.3;
+      }
+
+      .b10 {
+        top: 80%;
+
+        left: 48%;
+
+        transform: scale(0.7);
+
+        opacity: 0.3;
+      }
+
+      @keyframes bowFloat {
+        0%,
+        100% {
+          margin-top: 0;
+
+          rotate: -5deg;
+        }
+
+        50% {
+          margin-top: -12px;
+
+          rotate: 5deg;
+        }
+      }
+
+      /* =====================================================
+   IMAGE FALLBACK (shown if a photo file is missing)
+===================================================== */
+
+      .img-fallback {
+        background: linear-gradient(135deg, #f3d3dc, #d889a0 55%, #f8e5eb);
+
+        display: flex !important;
+
+        align-items: center;
+
+        justify-content: center;
+      }
+
+      .img-fallback::after {
+        content: "✦";
+
+        color: #fff;
+
+        font-size: 20px;
+
+        opacity: 0.85;
+
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      }
+
+      /* =====================================================
+   ENVELOPE INTRO SCREEN
+===================================================== */
+
+      .envelope-screen {
+        min-height: 100svh;
+
+        position: relative;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        overflow: hidden;
+
+        background: radial-gradient(
+          circle at 50% 50%,
+          #ffffff 0%,
+          #fffafa 60%,
+          #fff3f6 100%
+        );
+
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+
+      .envelope-screen.hidden {
+        display: none;
+      }
+
+      .envelope-scene {
+        width: 100%;
+
+        max-width: 460px;
+
+        padding: 24px;
+
+        text-align: center;
+
+        position: relative;
+
+        z-index: 2;
+      }
+
+      .envelope-kicker {
+        font-size: 10px;
+
+        letter-spacing: 4px;
+
+        color: #9b7d85;
+
+        margin-bottom: 42px;
+
+        opacity: 0;
+
+        animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      }
+
+      .envelope {
+        width: 260px;
+
+        height: 172px;
+
+        margin: 0 auto;
+
+        position: relative;
+
+        cursor: pointer;
+
+        perspective: 1000px;
+
+        opacity: 0;
+
+        animation: envelopeReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.55s
+          forwards;
+      }
+
+      @keyframes envelopeReveal {
+        from {
+          opacity: 0;
+
+          transform: translateY(40px) scale(0.9);
+
+          filter: blur(10px);
+        }
+
+        to {
+          opacity: 1;
+
+          transform: translateY(0) scale(1);
+
+          filter: blur(0);
+        }
+      }
+
+      .envelope-body {
+        position: absolute;
+
+        inset: 0;
+
+        border-radius: 4px;
+
+        background: linear-gradient(160deg, #ffffff, #fbeef1 65%, #f7e2e8);
+
+        box-shadow: 0 25px 55px rgba(216, 137, 160, 0.28);
+
+        z-index: 1;
+      }
+
+      .envelope-pocket {
+        position: absolute;
+
+        left: 0;
+
+        right: 0;
+
+        bottom: 0;
+
+        height: 100%;
+
+        clip-path: polygon(0 100%, 50% 42%, 100% 100%);
+
+        background: linear-gradient(180deg, #fdf3f5, #f6dde4);
+
+        z-index: 3;
+      }
+
+      .letter {
+        position: absolute;
+
+        left: 50%;
+
+        bottom: 6px;
+
+        width: 78%;
+
+        height: 74%;
+
+        background: #fffdfd;
+
+        border-radius: 3px;
+
+        box-shadow: 0 8px 20px rgba(120, 60, 75, 0.14);
+
+        transform: translate(-50%, 14%) scale(0.94);
+
+        z-index: 2;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 8px;
+
+        padding: 10px;
+
+        transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .letter-mono,
+      .letter-line,
+      .letter-text {
+        opacity: 0;
+
+        transition: opacity 0.5s ease 0.55s;
+      }
+
+      .letter-mono {
+        font-family: "Playfair Display", serif;
+
+        font-size: 30px;
+
+        color: var(--pink-dark);
+
+        line-height: 1;
+      }
+
+      .letter-line {
+        width: 34px;
+
+        height: 1px;
+
+        background: var(--pink);
+      }
+
+      .letter-text {
+        font-size: 9px;
+
+        letter-spacing: 2px;
+
+        color: #a28f94;
+
+        text-transform: uppercase;
+      }
+
+      .envelope.opening .letter {
+        z-index: 6;
+
+        transform: translate(-50%, -78%) scale(1.03);
+
+        transition: transform 1.05s cubic-bezier(0.16, 1, 0.3, 1) 0.45s;
+      }
+
+      .envelope.opening .letter-mono,
+      .envelope.opening .letter-line,
+      .envelope.opening .letter-text {
+        opacity: 1;
+      }
+
+      .envelope-flap {
+        position: absolute;
+
+        left: 0;
+
+        right: 0;
+
+        top: 0;
+
+        height: 100%;
+
+        clip-path: polygon(0 0, 50% 56%, 100% 0);
+
+        background: linear-gradient(180deg, #fbeef1, #f3d7de);
+
+        transform-origin: top center;
+
+        transform: rotateX(0deg);
+
+        z-index: 5;
+
+        transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+      }
+
+      .envelope.opening .envelope-flap {
+        transform: rotateX(180deg);
+
+        z-index: 0;
+      }
+
+      .envelope-seal {
+        position: absolute;
+
+        left: 50%;
+
+        top: 40%;
+
+        width: 34px;
+
+        height: 34px;
+
+        border-radius: 50%;
+
+        background: radial-gradient(
+          circle at 35% 30%,
+          #e28aa2,
+          var(--pink-dark)
+        );
+
+        color: #fff;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 14px;
+
+        box-shadow: 0 6px 14px rgba(184, 110, 132, 0.4);
+
+        transform: translate(-50%, -50%);
+
+        z-index: 6;
+
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s ease;
+      }
+
+      .envelope.opening .envelope-seal {
+        opacity: 0;
+
+        transform: translate(-50%, -50%) scale(0.4);
+      }
+
+      .envelope-hint {
+        margin-top: 30px;
+
+        font-size: 10px;
+
+        letter-spacing: 2px;
+
+        color: #a28f94;
+
+        text-transform: uppercase;
+
+        opacity: 0;
+
+        animation:
+          revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards,
+          hintPulse 2.2s ease-in-out 2.1s infinite;
+      }
+
+      @keyframes hintPulse {
+        0%,
+        100% {
+          opacity: 0.6;
+        }
+
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .envelope-screen.closing {
+        opacity: 0;
+
+        transform: scale(1.04);
+      }
+
+      /* =====================================================
+   COVER
+===================================================== */
+
+      #cover {
+        display: none;
+      }
+
+      #cover.revealed {
+        display: flex;
+      }
+
+      .cover {
+        min-height: 100svh;
+
+        position: relative;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        overflow: hidden;
+
+        background: radial-gradient(
+          circle at 50% 50%,
+          #ffffff 0%,
+          #fffafa 60%,
+          #fff3f6 100%
+        );
+
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+      }
+
+      .cover-content {
+        width: 100%;
+
+        max-width: 500px;
+
+        padding: 35px 24px;
+
+        text-align: center;
+
+        position: relative;
+
+        z-index: 2;
+      }
+
+      /* =====================================================
+   COVER TEXT
+===================================================== */
+
+      .kicker {
+        font-size: 10px;
+
+        letter-spacing: 4px;
+
+        color: #9b7d85;
+
+        margin-bottom: 20px;
+      }
+
+      .big18 {
+        font-family: "Playfair Display", serif;
+
+        font-size: 170px;
+
+        line-height: 1.05;
+
+        padding-bottom: 8px;
+
+        font-weight: 400;
+
+        letter-spacing: -13px;
+
+        color: #171515;
+
+        opacity: 0;
+
+        animation: bigReveal 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      }
+
+      .big18 span {
+        color: var(--pink);
+      }
+
+      @keyframes bigReveal {
+        from {
+          opacity: 0;
+
+          transform: translateY(50px) scale(0.8);
+
+          filter: blur(15px);
+        }
+
+        to {
+          opacity: 1;
+
+          transform: translateY(0) scale(1);
+
+          filter: blur(0);
+        }
+      }
+
+      .cover-title {
+        margin-top: 55px;
+
+        font-family: "Playfair Display", serif;
+
+        font-size: 30px;
+
+        font-weight: 400;
+
+        opacity: 0;
+
+        animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+      }
+
+      .cover-title span {
+        color: var(--pink);
+
+        font-style: italic;
+      }
+
+      .cover-subtitle {
+        margin-top: 10px;
+
+        font-size: 12px;
+
+        color: #777;
+
+        opacity: 0;
+
+        animation: revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.85s forwards;
+      }
+
+      @keyframes revealUp {
+        from {
+          opacity: 0;
+
+          transform: translateY(30px);
+
+          filter: blur(8px);
+        }
+
+        to {
+          opacity: 1;
+
+          transform: translateY(0);
+
+          filter: blur(0);
+        }
+      }
+
+      /* =====================================================
+   MAIN PHOTO
+===================================================== */
+
+      .cover-photo {
+        width: 190px;
+
+        height: 230px;
+
+        margin: 30px auto 0;
+
+        position: relative;
+
+        opacity: 0;
+
+        animation: photoReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
+      }
+
+      .cover-photo {
+        width: 210px;
+        height: 210px;
+        margin: 30px auto 0;
+        position: relative;
+        border-radius: 50%;
+        padding: 5px;
+        background: linear-gradient(135deg, #f3d3dc, #d889a0, #f8e5eb);
+        box-shadow: 0 15px 40px rgba(216, 137, 160, 0.22);
+        overflow: hidden;
+      }
+
+      .cover-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 60%;
+        display: block;
+        box-shadow: none;
+        filter: none;
+        object-position: center 40%;
+      }
+
+      @keyframes photoReveal {
+        from {
+          opacity: 0;
+
+          transform: translateY(80px) scale(0.8);
+
+          filter: blur(15px);
+        }
+
+        to {
+          opacity: 1;
+
+          transform: translateY(0) scale(1);
+
+          filter: blur(0);
+        }
+      }
+
+      @keyframes personFloat {
+        0%,
+        100% {
+          translate: 0 0;
+        }
+
+        50% {
+          translate: 0 -7px;
+        }
+      }
+
+      /* =====================================================
+   COUNTDOWN
+===================================================== */
+
+      .count-title {
+        margin-top: 20px;
+
+        font-size: 10px;
+
+        color: #999;
+
+        letter-spacing: 2px;
+
+        opacity: 0;
+
+        animation: revealUp 0.8s ease 1.2s forwards;
+      }
+
+      .countdown {
+        display: flex;
+
+        justify-content: center;
+
+        margin-top: 12px;
+
+        opacity: 0;
+
+        animation: revealUp 0.8s ease 1.3s forwards;
+      }
+
+      .time {
+        width: 65px;
+
+        border-right: 1px solid #eadde0;
+      }
+
+      .time:last-child {
+        border-right: none;
+      }
+
+      .time-number {
+        display: block;
+
+        font-family: "Playfair Display", serif;
+
+        font-size: 27px;
+
+        transition: transform 0.3s ease;
+      }
+
+      .time-number.changed {
+        animation: numberChange 0.35s ease;
+      }
+
+      @keyframes numberChange {
+        0% {
+          opacity: 0.2;
+
+          transform: translateY(8px);
+        }
+
+        100% {
+          opacity: 1;
+
+          transform: translateY(0);
+        }
+      }
+
+      .time-label {
+        display: block;
+
+        margin-top: 4px;
+
+        font-size: 7px;
+
+        color: #a28f94;
+
+        letter-spacing: 1px;
+      }
+
+      /* =====================================================
+   OPEN BUTTON
+===================================================== */
+
+      .open-button {
+        margin-top: 27px;
+
+        padding: 15px 28px;
+
+        border: 1px solid #171515;
+
+        background: #171515;
+
+        color: white;
+
+        font-size: 9px;
+
+        letter-spacing: 2px;
+
+        cursor: pointer;
+
+        position: relative;
+
+        overflow: hidden;
+
+        opacity: 0;
+
+        animation: revealUp 0.8s ease 1.45s forwards;
+
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .open-button::before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+
+        left: -120%;
+
+        width: 60%;
+
+        height: 100%;
+
+        background: linear-gradient(
+          100deg,
+          transparent,
+          rgba(255, 255, 255, 0.45),
+          transparent
+        );
+
+        transform: skewX(-20deg);
+
+        animation: buttonShine 4s ease-in-out infinite;
+      }
+
+      @keyframes buttonShine {
+        0%,
+        45% {
+          left: -120%;
+        }
+
+        70%,
+        100% {
+          left: 150%;
+        }
+      }
+
+      .open-button:hover {
+        background: var(--pink);
+
+        border-color: var(--pink);
+
+        transform: translateY(-3px);
+
+        box-shadow: 0 15px 30px rgba(216, 137, 160, 0.25);
+      }
+
+      /* =====================================================
+   INVITATION
+===================================================== */
+
+      .invitation {
+        display: none;
+
+        min-height: 100vh;
+
+        position: relative;
+
+        background: #fffdfd;
+      }
+
+      .invitation.active {
+        display: block;
+      }
+
+      /* =====================================================
+   EVENT INTRO
+===================================================== */
+
+      .event-intro {
+        position: relative;
+
+        padding: 90px 24px 75px;
+
+        text-align: center;
+
+        overflow: hidden;
+      }
+
+      .event-number {
+        font-family: "Playfair Display", serif;
+
+        font-size: 100px;
+
+        line-height: 1.15;
+
+        padding-bottom: 6px;
+
+        color: var(--pink);
+      }
+
+      .event-intro h1 {
+        margin-top: 30px;
+
+        font-family: "Playfair Display", serif;
+
+        font-size: 43px;
+
+        font-weight: 400;
+
+        line-height: 1.05;
+      }
+
+      .event-intro h1 span {
+        color: var(--pink);
+
+        font-style: italic;
+      }
+
+      .event-intro p {
+        max-width: 320px;
+
+        margin: 20px auto 0;
+
+        font-size: 13px;
+
+        color: #777;
+
+        line-height: 1.8;
+      }
+
+      /* =====================================================
+   LETTER-BY-LETTER TEXT REVEAL
+===================================================== */
+
+      .split-line {
+        display: block;
+        overflow: hidden;
+      }
+
+      .split-char {
+        display: inline-block;
+        will-change: transform, opacity, filter;
+        opacity: 0;
+        transform: translateY(60%) rotateX(-60deg) scale(0.85);
+        filter: blur(6px);
+        transition:
+          opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+          filter 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: var(--char-delay, 0s);
+      }
+
+      .split-text.split-in-view .split-char {
+        opacity: 1;
+        transform: translateY(0) rotateX(0) scale(1);
+        filter: blur(0);
+      }
+
+      /* =====================================================
+   SHIMMER (gradient sweep across key numbers/words)
+===================================================== */
+
+      .shimmer-text {
+        background: linear-gradient(
+          100deg,
+          var(--dark) 38%,
+          var(--pink) 48%,
+          #f6c9d6 52%,
+          var(--dark) 62%
+        );
+        background-size: 260% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmerSweep 3.2s ease-in-out infinite;
+        animation-delay: 1.6s;
+      }
+
+      @keyframes shimmerSweep {
+        0% {
+          background-position: 120% 0;
+        }
+        45%,
+        100% {
+          background-position: -40% 0;
+        }
+      }
+
+      /* =====================================================
+   MAGNETIC / RIPPLE BUTTON TAP
+===================================================== */
+
+      .ripple-surface {
+        position: relative !important;
+        overflow: hidden;
+      }
+
+      .ripple-dot {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.55);
+        transform: scale(0);
+        pointer-events: none;
+        animation: rippleGrow 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      @keyframes rippleGrow {
+        to {
+          transform: scale(1);
+          opacity: 0;
+        }
+      }
+
+      .tap-pulse {
+        animation: tapPulse 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      @keyframes tapPulse {
+        0% {
+          transform: scale(1);
+        }
+        40% {
+          transform: scale(0.94);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* =====================================================
+   SOUND TOGGLE
+===================================================== */
+
+      .sound-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid rgba(216, 137, 160, 0.25);
+        background: rgba(255, 253, 253, 0.88);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 8px 22px rgba(150, 90, 110, 0.16);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        line-height: 1;
+        z-index: 99998;
+        cursor: pointer;
+        transition:
+          transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+          box-shadow 0.3s ease;
+      }
+
+      .sound-toggle:active {
+        transform: scale(0.86);
+      }
+
+      .sound-toggle.just-toggled {
+        animation: soundTogglePulse 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      @keyframes soundTogglePulse {
+        0% {
+          transform: scale(1);
+        }
+        45% {
+          transform: scale(1.18);
+          box-shadow: 0 8px 26px rgba(216, 137, 160, 0.35);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* =====================================================
+   SCROLL PROGRESS BAR
+===================================================== */
+
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(
+          90deg,
+          var(--pink-light),
+          var(--pink),
+          var(--pink-dark)
+        );
+        z-index: 99998;
+        transition: width 0.08s linear;
+        box-shadow: 0 0 8px rgba(216, 137, 160, 0.55);
+      }
+
+      /* =====================================================
+   HEART BURST (final section confirmation)
+===================================================== */
+
+      .heart-burst {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 99997;
+        overflow: hidden;
+      }
+
+      .heart-piece {
+        position: absolute;
+        bottom: -5%;
+        font-size: 18px;
+        color: var(--pink);
+        opacity: 0;
+        animation: heartRise 2.6s ease-in forwards;
+      }
+
+      @keyframes heartRise {
+        0% {
+          opacity: 0;
+          transform: translateY(0) translateX(0) rotate(0deg) scale(0.6);
+        }
+        12% {
+          opacity: 0.9;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-100vh) translateX(var(--drift, 0px))
+            rotate(var(--spin, 180deg)) scale(1);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .split-char {
+          transition-duration: 0.01ms !important;
+        }
+        .shimmer-text {
+          animation: none !important;
+          -webkit-text-fill-color: currentColor;
+        }
+      }
+
+      /* =====================================================
+   REVEAL
+===================================================== */
+
+      .reveal {
+        opacity: 0;
+
+        transform: translateY(50px);
+
+        filter: blur(8px);
+
+        transition:
+          opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+          filter 1s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+
+        transform: translateY(0);
+
+        filter: blur(0);
+      }
+
+      /* =====================================================
+   SECTIONS
+===================================================== */
+
+      .section {
+        padding: 75px 22px;
+      }
+
+      .section-label {
+        font-size: 9px;
+
+        color: #b78b97;
+
+        letter-spacing: 3px;
+
+        margin-bottom: 13px;
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+
+        font-size: 40px;
+
+        font-weight: 400;
+
+        line-height: 1.1;
+      }
+
+      .section-title em {
+        color: var(--pink);
+
+        font-weight: 400;
+      }
+
+      /* =====================================================
+   TIMELINE
+===================================================== */
+
+      .timeline {
+        margin-top: 40px;
+
+        border-top: 1px solid #e8dde0;
+      }
+
+      .timeline-item {
+        padding: 27px 0;
+
+        border-bottom: 1px solid #e8dde0;
+
+        position: relative;
+
+        transition:
+          transform 0.4s ease,
+          padding-left 0.4s ease;
+      }
+
+      .timeline-item::before {
+        content: "";
+
+        position: absolute;
+
+        left: -1px;
+
+        top: 0;
+
+        width: 1px;
+
+        height: 0;
+
+        background: var(--pink);
+
+        transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .timeline-item:hover {
+        padding-left: 10px;
+      }
+
+      .timeline-item:hover::before {
+        height: 100%;
+      }
+
+      .timeline-time {
+        font-size: 10px;
+
+        letter-spacing: 2px;
+
+        color: var(--pink);
+
+        margin-bottom: 10px;
+      }
+
+      .timeline-title {
+        font-family: "Playfair Display", serif;
+
+        font-size: 24px;
+
+        margin-bottom: 9px;
+      }
+
+      .timeline-text {
+        font-size: 13px;
+
+        color: #666;
+
+        line-height: 1.8;
+      }
+
+      /* =====================================================
+   ART CARD
+===================================================== */
+
+      .art-card {
+        margin-top: 30px;
+
+        padding: 28px 22px;
+
+        background: var(--pink-soft);
+
+        position: relative;
+
+        overflow: hidden;
+
+        transition:
+          transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.5s ease;
+      }
+
+      .art-card::after {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+
+        left: -100%;
+
+        width: 60%;
+
+        height: 100%;
+
+        background: linear-gradient(
+          100deg,
+          transparent,
+          rgba(255, 255, 255, 0.5),
+          transparent
+        );
+
+        transform: skewX(-20deg);
+
+        transition: 0.8s;
+      }
+
+      .art-card:hover {
+        transform: translateY(-6px);
+
+        box-shadow: 0 20px 45px rgba(150, 90, 110, 0.12);
+      }
+
+      .art-card:hover::after {
+        left: 150%;
+      }
+
+      .art-card h3 {
+        font-family: "Playfair Display", serif;
+
+        font-size: 28px;
+
+        font-weight: 400;
+
+        margin-bottom: 15px;
+      }
+
+      .art-list {
+        list-style: none;
+      }
+
+      .art-list li {
+        padding: 9px 0;
+
+        font-size: 12px;
+
+        color: #555;
+
+        border-bottom: 1px solid rgba(200, 150, 165, 0.25);
+      }
+
+      .art-list li:last-child {
+        border-bottom: none;
+      }
+
+      .art-list li::before {
+        content: "—";
+
+        color: var(--pink);
+
+        margin-right: 8px;
+      }
+
+      /* =====================================================
+   LOCATION
+===================================================== */
+
+      .location {
+        margin-top: 40px;
+
+        padding: 30px 22px;
+
+        background: #171515;
+
+        color: white;
+
+        position: relative;
+
+        overflow: hidden;
+
+        transition:
+          transform 0.5s ease,
+          box-shadow 0.5s ease;
+      }
+
+      .location:hover {
+        transform: translateY(-5px);
+
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .location::before {
+        content: "";
+
+        position: absolute;
+
+        width: 180px;
+
+        height: 180px;
+
+        border-radius: 50%;
+
+        border: 1px solid rgba(216, 137, 160, 0.3);
+
+        right: -80px;
+
+        top: -80px;
+
+        animation: locationRing 6s linear infinite;
+      }
+
+      @keyframes locationRing {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .location-label {
+        font-size: 8px;
+
+        letter-spacing: 3px;
+
+        color: #d9a7b4;
+      }
+
+      .location h3 {
+        font-family: "Playfair Display", serif;
+
+        font-size: 29px;
+
+        font-weight: 400;
+
+        margin-top: 14px;
+      }
+
+      .location p {
+        margin-top: 12px;
+
+        font-size: 12px;
+
+        line-height: 1.8;
+
+        color: #ccc;
+      }
+
+      .map-button {
+        display: inline-block;
+
+        margin-top: 20px;
+
+        color: white;
+
+        border-bottom: 1px solid var(--pink);
+
+        padding-bottom: 4px;
+
+        text-decoration: none;
+
+        font-size: 9px;
+
+        letter-spacing: 2px;
+      }
+
+      /* =====================================================
+               DRESS CODE
+            ===================================================== */
+
+      .dress-code {
+        position: relative;
+        overflow: hidden;
+
+        padding: 70px 22px;
+
+        background:
+          radial-gradient(
+            circle at 15% 15%,
+            rgba(243, 211, 220, 0.65),
+            transparent 34%
+          ),
+          radial-gradient(
+            circle at 85% 85%,
+            rgba(216, 137, 160, 0.12),
+            transparent 38%
+          ),
+          #fffdfd;
+      }
+
+      /* Декоративный круг сверху */
+
+      .dress-code::before {
+        content: "";
+
+        position: absolute;
+
+        width: 260px;
+        height: 260px;
+
+        top: -135px;
+        right: -95px;
+
+        border: 1px solid rgba(216, 137, 160, 0.18);
+
+        border-radius: 50%;
+
+        animation: dressOrbit 9s linear infinite;
+      }
+
+      /* Декоративный круг снизу */
+
+      .dress-code::after {
+        content: "";
+
+        position: absolute;
+
+        width: 160px;
+        height: 160px;
+
+        bottom: -90px;
+        left: -75px;
+
+        border: 1px solid rgba(216, 137, 160, 0.12);
+
+        border-radius: 50%;
+
+        animation: dressOrbit 7s linear infinite reverse;
+      }
+
+      .dress-head {
+        position: relative;
+        z-index: 2;
+      }
+
+      .dress-title {
+        font-family: "Playfair Display", serif;
+
+        font-size: 42px;
+
+        font-weight: 400;
+
+        line-height: 1.08;
+
+        margin-top: 4px;
+      }
+
+      .dress-title em {
+        color: var(--pink);
+
+        font-style: italic;
+      }
+
+      .dress-subtitle {
+        max-width: 320px;
+
+        margin-top: 16px;
+
+        color: #777;
+
+        font-size: 12px;
+
+        line-height: 1.8;
+      }
+
+      /* ПЛАТЬЕ / ЮБКА / ТУФЛИ / БОСОНОЖКИ */
+
+      .dress-items {
+        position: relative;
+
+        z-index: 2;
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 8px;
+
+        margin-top: 25px;
+      }
+
+      .dress-pill {
+        padding: 9px 13px;
+
+        border: 1px solid #eadde0;
+
+        border-radius: 999px;
+
+        background: rgba(255, 255, 255, 0.72);
+
+        color: #555;
+
+        font-size: 10px;
+
+        backdrop-filter: blur(8px);
+
+        transition:
+          transform 0.35s ease,
+          border-color 0.35s ease,
+          box-shadow 0.35s ease;
+      }
+
+      .dress-pill:hover {
+        transform: translateY(-4px);
+
+        border-color: var(--pink-light);
+
+        box-shadow: 0 12px 25px rgba(216, 137, 160, 0.14);
+      }
+
+      /* ФОТО */
+
+      .dress-gallery {
+        position: relative;
+
+        z-index: 2;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+
+        margin-top: 30px;
+      }
+
+      .dress-photo {
+        position: relative;
+
+        height: 255px;
+
+        overflow: hidden;
+
+        border-radius: 18px;
+
+        background: var(--pink-soft);
+
+        box-shadow: 0 14px 35px rgba(150, 90, 110, 0.1);
+
+        opacity: 0;
+
+        transform: translateY(35px) scale(0.96);
+
+        transition:
+          opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.4s ease;
+      }
+
+      /* Второе фото чуть ниже */
+
+      .dress-photo:nth-child(2) {
+        margin-top: 24px;
+
+        transition-delay: 0.12s;
+      }
+
+      /* Когда появляется на экране */
+
+      .dress-photo.visible {
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+      }
+
+      .dress-photo img {
+        width: 100%;
+
+        height: 100%;
+
+        display: block;
+
+        object-fit: cover;
+
+        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .dress-photo:hover img {
+        transform: scale(1.06);
+      }
+
+      /* Блик при наведении */
+
+      .dress-photo::after {
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background: linear-gradient(
+          120deg,
+          transparent 25%,
+          rgba(255, 255, 255, 0.48) 50%,
+          transparent 75%
+        );
+
+        transform: translateX(-130%);
+
+        transition: transform 0.9s ease;
+
+        pointer-events: none;
+      }
+
+      .dress-photo:hover::after {
+        transform: translateX(130%);
+      }
+
+      /* Подпись на фотографии */
+
+      .dress-caption {
+        position: absolute;
+
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+
+        z-index: 2;
+
+        padding: 9px 10px;
+
+        border-radius: 12px;
+
+        background: rgba(255, 255, 255, 0.82);
+
+        backdrop-filter: blur(8px);
+
+        color: #333;
+
+        font-size: 9px;
+
+        letter-spacing: 1.2px;
+
+        text-transform: uppercase;
+      }
+
+      /* Вращение декоративных кругов */
+
+      @keyframes dressOrbit {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Для маленьких телефонов */
+
+      @media (max-width: 380px) {
+        .dress-photo {
+          height: 225px;
+        }
+      }
+
+      /* =====================================================
+   TAKE
+===================================================== */
+
+      .take {
+        margin-top: 35px;
+      }
+
+      .take-item {
+        display: flex;
+
+        gap: 16px;
+
+        padding: 18px 0;
+
+        border-bottom: 1px solid #e8dde0;
+      }
+
+      .take-number {
+        color: var(--pink);
+
+        font-family: "Playfair Display", serif;
+
+        font-size: 20px;
+      }
+
+      .take-text strong {
+        display: block;
+
+        font-size: 13px;
+
+        margin-bottom: 5px;
+      }
+
+      .take-text span {
+        font-size: 11px;
+
+        color: #888;
+
+        line-height: 1.6;
+      }
+
+      /* =====================================================
+   SLEEPOVER
+===================================================== */
+
+      .sleepover {
+        background: #f8edf1;
+
+        padding: 75px 22px;
+      }
+
+      .sleepover h2 {
+        font-family: "Playfair Display", serif;
+
+        font-size: 40px;
+
+        font-weight: 400;
+      }
+
+      .sleepover h2 span {
+        color: var(--pink);
+
+        font-style: italic;
+      }
+
+      .sleepover p {
+        margin-top: 20px;
+
+        font-size: 13px;
+
+        color: #666;
+
+        line-height: 1.9;
+      }
+
+      .sleepover-list {
+        margin-top: 30px;
+
+        display: grid;
+
+        grid-template-columns:
+          1fr
+          1fr;
+
+        gap: 8px;
+      }
+
+      .sleep-card {
+        background: white;
+
+        padding: 22px 14px;
+
+        min-height: 100px;
+
+        transition:
+          transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.45s ease;
+      }
+
+      .sleep-card:hover {
+        transform: translateY(-7px);
+
+        box-shadow: 0 18px 35px rgba(150, 90, 110, 0.1);
+      }
+
+      .sleep-card-title {
+        font-family: "Playfair Display", serif;
+
+        font-size: 19px;
+
+        margin-bottom: 7px;
+      }
+
+      .sleep-card-text {
+        font-size: 10px;
+
+        color: #777;
+
+        line-height: 1.6;
+      }
+
+      /* =====================================================
+   MORNING
+===================================================== */
+
+      .morning {
+        padding: 75px 22px;
+
+        text-align: center;
+      }
+
+      .morning h2 {
+        font-family: "Playfair Display", serif;
+
+        font-size: 40px;
+
+        font-weight: 400;
+      }
+
+      .morning h2 span {
+        color: var(--pink);
+      }
+
+      .morning p {
+        max-width: 320px;
+
+        margin: 20px auto 0;
+
+        color: #777;
+
+        font-size: 13px;
+
+        line-height: 1.8;
+      }
+
+      /* =====================================================
+   GIRLS
+===================================================== */
+
+      .girls {
+        padding: 80px 18px;
+      }
+
+      .girls-header {
+        text-align: center;
+
+        margin-bottom: 35px;
+      }
+
+      .girls-header h2 {
+        font-family: "Playfair Display", serif;
+
+        font-size: 44px;
+
+        font-weight: 400;
+      }
+
+      .girls-header p {
+        margin-top: 10px;
+
+        font-size: 9px;
+
+        color: #999;
+
+        letter-spacing: 2px;
+      }
+
+      .girls-grid {
+        display: grid;
+
+        grid-template-columns:
+          1fr
+          1fr;
+
+        gap: 25px 10px;
+      }
+
+      .girl {
+        text-align: center;
+
+        overflow: hidden;
+
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .girl:hover {
+        transform: translateY(-5px);
+      }
+
+      .girl-photo {
+        width: 150px;
+        height: 150px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+
+        border-radius: 50%;
+
+        filter: saturate(0.82);
+
+        transition:
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          filter 0.8s ease;
+      }
+
+      .girl:hover .girl-photo {
+        transform: scale(1.04);
+
+        filter: saturate(1);
+      }
+
+      .girl-name {
+        margin-top: 11px;
+
+        font-family: "Playfair Display", serif;
+
+        font-size: 19px;
+      }
+
+      /* =====================================================
+   FINAL
+===================================================== */
+
+      .final {
+        position: relative;
+
+        min-height: 65svh;
+
+        background: #dca9b8;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        align-items: center;
+
+        text-align: center;
+
+        padding: 50px 25px;
+
+        overflow: hidden;
+      }
+
+      .final::before {
+        content: "";
+
+        position: absolute;
+
+        width: 350px;
+
+        height: 350px;
+
+        border-radius: 50%;
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+
+        animation: finalCircle 10s linear infinite;
+      }
+
+      @keyframes finalCircle {
+        0% {
+          transform: scale(0.6) rotate(0deg);
+
+          opacity: 0.3;
+        }
+
+        50% {
+          opacity: 0.7;
+        }
+
+        100% {
+          transform: scale(1.4) rotate(180deg);
+
+          opacity: 0;
+        }
+      }
+
+      .final h2 {
+        position: relative;
+
+        z-index: 2;
+
+        font-family: "Playfair Display", serif;
+
+        font-size: 45px;
+
+        font-weight: 400;
+      }
+
+      .final h2 em {
+        color: white;
+      }
+
+      .final p {
+        position: relative;
+
+        z-index: 2;
+
+        max-width: 310px;
+
+        margin-top: 20px;
+
+        color: #59484e;
+
+        font-size: 13px;
+
+        line-height: 1.8;
+      }
+
+      .final-small {
+        position: relative;
+
+        z-index: 2;
+
+        margin-top: 35px;
+
+        font-size: 8px;
+
+        letter-spacing: 4px;
+
+        color: #745762;
+      }
+
+      /* =====================================================
+   MOBILE
+===================================================== */
+
+      @media (hover: none) {
+        .timeline-item:hover {
+          padding-left: 0;
+        }
+
+        .art-card:hover {
+          transform: none;
+
+          box-shadow: none;
+        }
+
+        .location:hover {
+          transform: none;
+        }
+
+        .sleep-card:hover {
+          transform: none;
+
+          box-shadow: none;
+        }
+
+        .girl:hover {
+          transform: none;
+        }
+
+        .girl:hover .girl-photo {
+          transform: none;
+        }
+      }
+
+      /* =====================================================
+   DESKTOP
+===================================================== */
+
+      @media (min-width: 700px) {
+        body {
+          width: 480px;
+
+          margin: auto;
+
+          box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      /* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+
+          animation-iteration-count: 1 !important;
+
+          transition-duration: 0.01ms !important;
+        }
+      }
+      /* =====================================================
+               DRESS CODE — FULLSCREEN PHOTO
+            ===================================================== */
+
+      .dress-photo {
+        cursor: pointer;
+      }
+
+      /* Затемнение */
+
+      .dress-lightbox {
+        position: fixed;
+
+        inset: 0;
+
+        z-index: 9999;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 20px;
+
+        background: rgba(20, 15, 17, 0.94);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transition:
+          opacity 0.35s ease,
+          visibility 0.35s ease;
+      }
+
+      /* Открыто */
+
+      .dress-lightbox.active {
+        opacity: 1;
+
+        visibility: visible;
+      }
+
+      /* Большая фотография */
+
+      .dress-lightbox img {
+        max-width: 92vw;
+
+        max-height: 86vh;
+
+        width: auto;
+
+        height: auto;
+
+        object-fit: contain;
+
+        border-radius: 16px;
+
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45);
+
+        transform: scale(0.88);
+
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .dress-lightbox.active img {
+        transform: scale(1);
+      }
+
+      /* Кнопка X */
+
+      .dress-lightbox-close {
+        position: absolute;
+
+        top: 18px;
+
+        right: 20px;
+
+        width: 42px;
+
+        height: 42px;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid rgba(255, 255, 255, 0.25);
+
+        border-radius: 50%;
+
+        background: rgba(255, 255, 255, 0.08);
+
+        color: white;
+
+        font-size: 25px;
+
+        font-weight: 200;
+
+        cursor: pointer;
+
+        transition:
+          transform 0.3s ease,
+          background 0.3s ease;
+      }
+
+      .dress-lightbox-close:hover {
+        transform: rotate(90deg);
+
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      /* Подсказка */
+
+      .dress-lightbox-hint {
+        position: absolute;
+
+        bottom: 22px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        color: rgba(255, 255, 255, 0.65);
+
+        font-size: 9px;
+
+        letter-spacing: 2px;
+
+        text-transform: uppercase;
+
+        white-space: nowrap;
+      }
+
+      /* На маленьком телефоне */
+
+      @media (max-width: 480px) {
+        .dress-lightbox {
+          padding: 12px;
+        }
+
+        .dress-lightbox img {
+          max-width: 96vw;
+
+          max-height: 82vh;
+
+          border-radius: 12px;
+        }
+
+        .dress-lightbox-close {
+          top: 14px;
+
+          right: 14px;
+
+          width: 40px;
+
+          height: 40px;
+        }
+      }
+      /* =====================================================
+               APPLE STYLE — SECOND PAGE
+               Clean / Cinematic / Scroll Driven
+            ===================================================== */
+
+      #invitation {
+        --apple-ease: cubic-bezier(0.16, 1, 0.3, 1);
+        overflow-x: hidden;
+      }
+
+      /* -------------------------------
+               SECTIONS
+            -------------------------------- */
+
+      #invitation .section,
+      #invitation .dress-code,
+      #invitation .sleepover,
+      #invitation .morning,
+      #invitation .girls {
+        position: relative;
+        will-change: transform;
+      }
+
+      /* -------------------------------
+               SCROLL REVEAL
+            -------------------------------- */
+
+      #invitation .reveal {
+        opacity: 0;
+
+        transform: translateY(70px) scale(0.985);
+
+        filter: blur(8px);
+
+        transition:
+          opacity 1.1s var(--apple-ease),
+          transform 1.2s var(--apple-ease),
+          filter 1.1s var(--apple-ease);
+      }
+
+      #invitation .reveal.visible {
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+
+        filter: blur(0);
+      }
+
+      /* -------------------------------
+               TEXT (parallax offset while scrolling)
+               NOTE: .dress-title is intentionally excluded here —
+               it has its own dedicated reveal animation below and
+               fighting over the same `transform` property caused
+               the dress-code title (and by extension the whole
+               Apple-style scroll effect) to silently stop working.
+            -------------------------------- */
+
+      #invitation .section-title,
+      #invitation .sleepover h2,
+      #invitation .morning h2,
+      #invitation .girls h2 {
+        transform: translateY(var(--text-offset, 0px));
+
+        transition: transform 0.2s linear;
+      }
+
+      /* -------------------------------
+               SECTION LABEL
+            -------------------------------- */
+
+      #invitation .section-label {
+        opacity: 0;
+
+        transform: translateY(15px);
+
+        transition:
+          opacity 0.8s var(--apple-ease),
+          transform 0.8s var(--apple-ease);
+      }
+
+      #invitation .reveal.visible .section-label {
+        opacity: 1;
+
+        transform: translateY(0);
+      }
+
+      /* -------------------------------
+               TITLES
+            -------------------------------- */
+
+      #invitation .section-title,
+      #invitation .dress-title {
+        transition:
+          transform 0.8s var(--apple-ease),
+          opacity 0.8s ease;
+      }
+
+      /* -------------------------------
+               CARDS
+            -------------------------------- */
+
+      #invitation .art-card,
+      #invitation .location,
+      #invitation .sleep-card {
+        transform: translateY(0) scale(1);
+
+        transition:
+          transform 0.8s var(--apple-ease),
+          box-shadow 0.8s ease;
+      }
+
+      /* Mobile touch */
+
+      #invitation .art-card:active,
+      #invitation .location:active,
+      #invitation .sleep-card:active {
+        transform: scale(0.985);
+      }
+
+      /* -------------------------------
+               DRESS CODE
+            -------------------------------- */
+
+      #invitation .dress-code {
+        overflow: hidden;
+      }
+
+      /* Title */
+
+      #invitation .dress-title {
+        opacity: 0;
+
+        transform: translateY(45px) scale(0.97);
+
+        transition:
+          opacity 1s var(--apple-ease),
+          transform 1.1s var(--apple-ease);
+      }
+
+      #invitation .dress-code.visible .dress-title {
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+      }
+
+      /* Subtitle */
+
+      #invitation .dress-subtitle {
+        opacity: 0;
+
+        transform: translateY(25px);
+
+        transition:
+          opacity 0.9s var(--apple-ease) 0.15s,
+          transform 0.9s var(--apple-ease) 0.15s;
+      }
+
+      #invitation .dress-code.visible .dress-subtitle {
+        opacity: 1;
+
+        transform: translateY(0);
+      }
+
+      /* Pills */
+
+      #invitation .dress-pill {
+        opacity: 0;
+
+        transform: translateY(20px);
+
+        transition:
+          opacity 0.7s var(--apple-ease),
+          transform 0.7s var(--apple-ease);
+      }
+
+      #invitation .dress-code.visible .dress-pill:nth-child(1) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.15s;
+      }
+
+      #invitation .dress-code.visible .dress-pill:nth-child(2) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.22s;
+      }
+
+      #invitation .dress-code.visible .dress-pill:nth-child(3) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.29s;
+      }
+
+      #invitation .dress-code.visible .dress-pill:nth-child(4) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.36s;
+      }
+
+      /* -------------------------------
+               DRESS PHOTOS
+            -------------------------------- */
+
+      #invitation .dress-photo {
+        opacity: 0;
+
+        overflow: hidden;
+
+        transform: translateY(80px) scale(0.94);
+
+        transition:
+          opacity 1.2s var(--apple-ease),
+          transform 1.3s var(--apple-ease);
+      }
+
+      #invitation .dress-photo.visible {
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+      }
+
+      /* Actual image */
+
+      #invitation .dress-photo img {
+        transform: scale(1.12);
+
+        filter: blur(2px) brightness(0.92);
+
+        transition:
+          transform 1.6s var(--apple-ease),
+          filter 1.4s var(--apple-ease);
+      }
+
+      #invitation .dress-photo.visible img {
+        transform: scale(1);
+
+        filter: blur(0) brightness(1);
+      }
+
+      /* Second image enters slightly later */
+
+      #invitation .dress-photo:nth-child(2) {
+        transition-delay: 0.12s;
+      }
+
+      /* -------------------------------
+               IMAGE PRESS
+            -------------------------------- */
+
+      #invitation .dress-photo:active {
+        transform: scale(0.97);
+      }
+
+      #invitation .dress-photo:active img {
+        transform: scale(1.025);
+      }
+
+      /* -------------------------------
+               TAKE WITH YOU
+            -------------------------------- */
+
+      #invitation .take-item {
+        opacity: 0;
+
+        transform: translateY(35px);
+
+        transition:
+          opacity 0.9s var(--apple-ease),
+          transform 0.9s var(--apple-ease);
+      }
+
+      #invitation .take-item:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+
+      #invitation .take-item:nth-child(2) {
+        transition-delay: 0.12s;
+      }
+
+      #invitation .take-item:nth-child(3) {
+        transition-delay: 0.19s;
+      }
+
+      #invitation .reveal.visible .take-item {
+        opacity: 1;
+
+        transform: translateY(0);
+      }
+
+      /* -------------------------------
+               SLEEPOVER
+            -------------------------------- */
+
+      #invitation .sleep-card {
+        opacity: 0;
+
+        transform: translateY(45px) scale(0.98);
+
+        transition:
+          opacity 0.9s var(--apple-ease),
+          transform 1s var(--apple-ease);
+      }
+
+      #invitation .sleepover.visible .sleep-card {
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+      }
+
+      #invitation .sleep-card:nth-child(1) {
+        transition-delay: 0.05s;
+      }
+
+      #invitation .sleep-card:nth-child(2) {
+        transition-delay: 0.12s;
+      }
+
+      #invitation .sleep-card:nth-child(3) {
+        transition-delay: 0.19s;
+      }
+
+      #invitation .sleep-card:nth-child(4) {
+        transition-delay: 0.26s;
+      }
+
+      /* -------------------------------
+               GIRLS
+            -------------------------------- */
+
+      #invitation .girl {
+        opacity: 0;
+
+        transform: translateY(45px) scale(0.97);
+
+        transition:
+          opacity 0.9s var(--apple-ease),
+          transform 1s var(--apple-ease);
+      }
+
+      #invitation .girls.visible .girl {
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+      }
+
+      #invitation .girl:nth-child(1) {
+        transition-delay: 0.03s;
+      }
+
+      #invitation .girl:nth-child(2) {
+        transition-delay: 0.08s;
+      }
+
+      #invitation .girl:nth-child(3) {
+        transition-delay: 0.13s;
+      }
+
+      #invitation .girl:nth-child(4) {
+        transition-delay: 0.18s;
+      }
+
+      #invitation .girl:nth-child(5) {
+        transition-delay: 0.23s;
+      }
+
+      #invitation .girl:nth-child(6) {
+        transition-delay: 0.28s;
+      }
+
+      #invitation .girl:nth-child(7) {
+        transition-delay: 0.33s;
+      }
+
+      #invitation .girl:nth-child(8) {
+        transition-delay: 0.38s;
+      }
+
+      #invitation .girl:nth-child(9) {
+        transition-delay: 0.43s;
+      }
+
+      #invitation .girl:nth-child(10) {
+        transition-delay: 0.48s;
+      }
+
+      #invitation .girl:nth-child(11) {
+        transition-delay: 0.53s;
+      }
+
+      #invitation .girl:nth-child(12) {
+        transition-delay: 0.58s;
+      }
+
+      /* -------------------------------
+               GIRL IMAGE
+            -------------------------------- */
+
+      #invitation .girl-photo {
+        transform: scale(1.04);
+
+        transition:
+          transform 1.3s var(--apple-ease),
+          filter 1s ease;
+      }
+
+      #invitation .girls.visible .girl-photo {
+        transform: scale(1);
+      }
+
+      /* -------------------------------
+               MORNING
+            -------------------------------- */
+
+      #invitation .morning {
+        overflow: hidden;
+      }
+
+      /* -------------------------------
+               FINAL
+            -------------------------------- */
+
+      #invitation .final h2 {
+        opacity: 0;
+
+        transform: translateY(60px) scale(0.96);
+
+        transition:
+          opacity 1.3s var(--apple-ease),
+          transform 1.4s var(--apple-ease);
+      }
+
+      #invitation .final.visible h2 {
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+      }
+
+      /* -------------------------------
+               PERFORMANCE
+            -------------------------------- */
+
+      #invitation img {
+        backface-visibility: hidden;
+
+        -webkit-backface-visibility: hidden;
+      }
+
+      /* -------------------------------
+               REDUCED MOTION
+            -------------------------------- */
+
+      @media (prefers-reduced-motion: reduce) {
+        #invitation *,
+        #invitation *::before,
+        #invitation *::after {
+          animation: none !important;
+
+          transition: opacity 0.2s ease !important;
+
+          transform: none !important;
+
+          filter: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =====================================================
+     SCROLL PROGRESS
+===================================================== -->
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- =====================================================
+     HEART BURST LAYER
+===================================================== -->
+
+    <div class="heart-burst" id="heartBurst"></div>
+
+    <!-- =====================================================
+     SOUND TOGGLE
+===================================================== -->
+
+    <button
+      class="sound-toggle"
+      id="soundToggle"
+      type="button"
+      aria-label="Включить звук"
+      aria-pressed="false"
+    >
+      <span id="soundIcon">🔇</span>
+    </button>
+
+    <!-- =====================================================
+     LOADER
+===================================================== -->
+
+    <div class="page-loader" id="pageLoader">
+      <div class="loader-content">
+        <div class="loader-number">18</div>
+
+        <div class="loader-line"></div>
+
+        <div class="loader-text">LOADING YOUR INVITATION</div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+     TRANSITION
+===================================================== -->
+
+    <div class="transition-screen" id="transitionScreen">
+      <div class="transition-circle"></div>
+    </div>
+
+    <!-- =====================================================
+     PARTICLES
+===================================================== -->
+
+    <div class="particles" id="particles"></div>
+
+    <!-- =====================================================
+     ENVELOPE INTRO
+===================================================== -->
+
+    <section class="envelope-screen" id="envelopeScreen">
+      <div class="envelope-scene">
+        <div class="envelope-kicker">BIRTHDAY INVITATION</div>
+
+        <div class="envelope" id="envelopeBox">
+          <div class="envelope-body"></div>
+
+          <div class="letter">
+            <div class="letter-mono">18</div>
+            <div class="letter-line"></div>
+            <div class="letter-text">открой меня</div>
+          </div>
+
+          <div class="envelope-pocket"></div>
+
+          <div class="envelope-flap"></div>
+
+          <div class="envelope-seal">♡</div>
+        </div>
+
+        <div class="envelope-hint">Нажми, чтобы открыть</div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+     FIRST PAGE
+===================================================== -->
+
+    <section class="cover" id="cover">
+      <!-- BOWS -->
+
+      <div class="bows">
+        <div class="bow b1">
+          <i></i>
+
+          <span></span>
+
+          <span></span>
+        </div>
+
+        <div class="bow b2">
+          <i></i>
+
+          <span></span>
+
+          <span></span>
+        </div>
+
+        <div class="bow b3">
+          <i></i>
+
+          <span></span>
+
+          <span></span>
+        </div>
+
+        <div class="bow b4">
+          <i></i>
+
+          <span></span>
+
+          <span></span>
+        </div>
+
+        <div class="bow b5">
+          <i></i>
+
+          <span></span>
+
+          <span></span>
+        </div>
+
+        <div class="bow b6">
+          <i></i>
+
+          <span></span>
+
+          <span></span>
+        </div>
+
+        <div class="bow b7">
+          <i></i>
+
+          <span></span>
+
+          <span></span>
+        </div>
+
+        <div class="bow b8">
+          <i></i>
+
+          <span></span>
+
+          <span></span>
+        </div>
+
+        <div class="bow b9">
+          <i></i>
+
+          <span></span>
+
+          <span></span>
+        </div>
+
+        <div class="bow b10">
+          <i></i>
+
+          <span></span>
+
+          <span></span>
+        </div>
+      </div>
+
+      <div class="cover-content">
+        <div class="kicker">BIRTHDAY INVITATION</div>
+
+        <div class="big18">1<span>8</span></div>
+
+        <div class="cover-title">
+          My
+          <span> 18th Birthday </span>
+        </div>
+
+        <div class="cover-subtitle">one night · one story · my girls</div>
+
+        <!-- MAIN PHOTO -->
+
+        <div class="cover-photo">
+          <img src="images/photo-main.png" alt="Birthday girl" />
+        </div>
+
+        <!-- COUNTDOWN -->
+
+        <div class="count-title">ДО МОЕГО ДНЯ РОЖДЕНИЯ</div>
+
+        <div class="countdown">
+          <div class="time">
+            <span class="time-number" id="days"> 00 </span>
+
+            <span class="time-label"> DAYS </span>
+          </div>
+
+          <div class="time">
+            <span class="time-number" id="hours"> 00 </span>
+
+            <span class="time-label"> HOURS </span>
+          </div>
+
+          <div class="time">
+            <span class="time-number" id="minutes"> 00 </span>
+
+            <span class="time-label"> MINUTES </span>
+          </div>
+
+          <div class="time">
+            <span class="time-number" id="seconds"> 00 </span>
+
+            <span class="time-label"> SECONDS </span>
+          </div>
+        </div>
+
+        <!-- OPEN -->
+
+        <button class="open-button" onclick="openInvitation()">
+          ОТКРЫТЬ ПРИГЛАШЕНИЕ
+        </button>
+      </div>
+    </section>
+
+    <!-- =====================================================
+     SECOND PAGE
+===================================================== -->
+
+    <main class="invitation" id="invitation">
+      <!-- =================================================
+         INTRO
+    ================================================= -->
+
+      <section class="event-intro reveal">
+        <!-- BOWS (scoped to this section only) -->
+
+        <div class="bows">
+          <div class="bow b1">
+            <i></i>
+
+            <span></span>
+
+            <span></span>
+          </div>
+
+          <div class="bow b2">
+            <i></i>
+
+            <span></span>
+
+            <span></span>
+          </div>
+
+          <div class="bow b3">
+            <i></i>
+
+            <span></span>
+
+            <span></span>
+          </div>
+
+          <div class="bow b4">
+            <i></i>
+
+            <span></span>
+
+            <span></span>
+          </div>
+
+          <div class="bow b5">
+            <i></i>
+
+            <span></span>
+
+            <span></span>
+          </div>
+
+          <div class="bow b6">
+            <i></i>
+
+            <span></span>
+
+            <span></span>
+          </div>
+        </div>
+
+        <div class="event-number shimmer-text">18</div>
+
+        <h1>
+          You're invited<br />
+
+          to my
+          <span> birthday. </span>
+        </h1>
+
+        <p>
+          Один вечер, который мы проведём вместе — от арт-вечера до ночёвки.
+        </p>
+      </section>
+
+      <!-- =================================================
+         PLAN
+    ================================================= -->
+
+      <section class="section reveal">
+        <div class="section-label">THE PLAN</div>
+
+        <h2 class="section-title">
+          Наш
+          <em> вечер. </em>
+        </h2>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">17:00</div>
+
+            <div class="timeline-title">Встречаемся в кафе</div>
+
+            <div class="timeline-text">
+              1 сентября в 17:00 начинаем наш вечер с арт-терапии и уютной
+              атмосферы. Кафе "ARCHA"
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-time">ART NIGHT</div>
+
+            <div class="timeline-title">Арт-вечер</div>
+
+            <div class="timeline-text">
+              Создаём свои работы, делаем карту желаний и просто наслаждаемся
+              вечером вместе.
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-time">MEMORIES</div>
+
+            <div class="timeline-title">Фото & Content</div>
+
+            <div class="timeline-text">
+              Фотосессия, тренды, персональные фотографии и видео для каждой из
+              вас.
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-time">LATER</div>
+
+            <div class="timeline-title">Едем ко мне</div>
+
+            <div class="timeline-text">
+              После кафе продолжаем наш вечер уже дома — игры, музыка,
+              разговоры, еда и ночёвка.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================
+         ART
+    ================================================= -->
+
+      <section class="section reveal">
+        <div class="section-label">ART EVENING</div>
+
+        <h2 class="section-title">
+          Что будет
+          <em> в кафе? </em>
+        </h2>
+
+        <div class="art-card">
+          <h3>Всё уже включено.</h3>
+
+          <ul class="art-list">
+            <li>Все материалы для арт-вечера</li>
+
+            <li>Материалы для карты желаний</li>
+
+            <li>Сопровождение на протяжении всего вечера</li>
+
+            <li>Персональные фотографии</li>
+
+            <li>Персональные видео</li>
+
+            <li>Еда и закуски</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- =================================================
+         LOCATION
+    ================================================= -->
+
+      <section class="section reveal">
+        <div class="section-label">LOCATION</div>
+
+        <h2 class="section-title">
+          Где
+          <em> встречаемся? </em>
+        </h2>
+
+        <div class="location">
+          <div class="location-label">01 / CAFE</div>
+
+          <h3>Кафе "ARCHA"</h3>
+
+          <p>
+            1 сентября · 17:00
+            <br />
+
+            ул.Пржевальского 105
+          </p>
+
+          <a
+            href="https://maps.app.goo.gl/EygnwKCmvcWqPvTi7"
+            target="_blank"
+            class="map-button"
+          >
+            ОТКРЫТЬ НА КАРТЕ →
+          </a>
+        </div>
+      </section>
+
+      <!-- =================================================
+         DRESS CODE
+    ================================================= -->
+
+      <section class="dress-code reveal">
+        <div class="dress-head">
+          <div class="section-label">DRESS CODE</div>
+
+          <h2 class="dress-title">Твой <em>образ.</em></h2>
+
+          <p class="dress-subtitle">
+            Для нашего вечера выбираем красивый и женственный образ — главное,
+            чтобы тебе было комфортно и ты чувствовала себя собой.
+          </p>
+
+          <div class="dress-items">
+            <div class="dress-pill">Платье</div>
+
+            <div class="dress-pill">Юбка</div>
+
+            <div class="dress-pill">Туфли</div>
+
+            <div class="dress-pill">Босоножки</div>
+          </div>
+        </div>
+
+        <div class="dress-gallery">
+          <div class="dress-photo" onclick="openDressPhoto(this)">
+            <img src="images/dress1.jpg" alt="Пример образа — платье" />
+
+            <div class="dress-caption">Look 01 · платье</div>
+          </div>
+
+          <div class="dress-photo" onclick="openDressPhoto(this)">
+            <img src="images/dress2.jpg" alt="Пример образа — юбка" />
+
+            <div class="dress-caption">Look 02 · юбка</div>
+          </div>
+        </div>
+      </section>
+      <!-- =================================================
+         TAKE WITH YOU
+    ================================================= -->
+
+      <section class="section reveal">
+        <div class="section-label">FOR THE NIGHT</div>
+
+        <h2 class="section-title">
+          Не забудь
+          <em> взять. </em>
+        </h2>
+
+        <div class="take">
+          <div class="take-item">
+            <div class="take-number">01</div>
+
+            <div class="take-text">
+              <strong> Пижаму </strong>
+
+              <span> Для нашей ночёвки у меня дома. </span>
+            </div>
+          </div>
+
+          <div class="take-item">
+            <div class="take-number">02</div>
+
+            <div class="take-text">
+              <strong> Личные вещи </strong>
+
+              <span> Всё необходимое, что понадобится тебе утром. </span>
+            </div>
+          </div>
+
+          <div class="take-item">
+            <div class="take-number">03</div>
+
+            <div class="take-text">
+              <strong> Хорошее настроение </strong>
+
+              <span> Остальное уже организовано. </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================
+         SLEEPOVER
+    ================================================= -->
+
+      <section class="sleepover reveal">
+        <div class="section-label">02 / SLEEPOVER</div>
+
+        <h2>
+          А потом
+          <br />
+
+          <span> не спим. </span>
+        </h2>
+
+        <p>
+          После кафе едем ко мне домой и продолжаем наш вечер. Никакой спешки —
+          просто наслаждаемся временем вместе.
+        </p>
+
+        <div class="sleepover-list">
+          <div class="sleep-card">
+            <div class="sleep-card-title">Games</div>
+
+            <div class="sleep-card-text">
+              Разные игры и активности на всю ночь.
+            </div>
+          </div>
+
+          <div class="sleep-card">
+            <div class="sleep-card-title">Food</div>
+
+            <div class="sleep-card-text">
+              Еда, закуски и всё, что понадобится ночью.
+            </div>
+          </div>
+
+          <div class="sleep-card">
+            <div class="sleep-card-title">Trends</div>
+
+            <div class="sleep-card-text">
+              Снимаем наши любимые тренды и видео.
+            </div>
+          </div>
+
+          <div class="sleep-card">
+            <div class="sleep-card-title">Memories</div>
+
+            <div class="sleep-card-text">
+              Разговоры, музыка, фотографии и воспоминания.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================
+         MORNING
+    ================================================= -->
+
+      <section class="morning reveal">
+        <div class="section-label">THE NEXT MORNING</div>
+
+        <h2>
+          Утро
+          <br />
+
+          <span> без спешки. </span>
+        </h2>
+
+        <p>
+          Утром спокойно просыпаемся, завтракаем и собираемся. Я лично провожу
+          каждую до нужного места.
+        </p>
+      </section>
+
+      <!-- =================================================
+         MY GIRLS
+    ================================================= -->
+
+      <section class="girls reveal">
+        <div class="girls-header">
+          <div class="section-label">MY PEOPLE</div>
+
+          <h2>My Girls.</h2>
+
+          <p>THE ONES WHO MAKE IT SPECIAL</p>
+        </div>
+
+        <div class="girls-grid">
+          <div class="girl">
+            <img class="girl-photo" src="images/girl1.jpg" alt="Girl 1" />
+
+            <div class="girl-name">🌸Жамиля🌸</div>
+          </div>
+
+          <div class="girl">
+            <img class="girl-photo" src="images/girl2.jpg" alt="Girl 2" />
+
+            <div class="girl-name">🌸Альбина🌸</div>
+          </div>
+
+          <div class="girl">
+            <img class="girl-photo" src="images/girl3.jpg" alt="Girl 3" />
+
+            <div class="girl-name">🌸Амина🌸</div>
+          </div>
+
+          <div class="girl">
+            <img class="girl-photo" src="images/girl4.jpg" alt="Girl 4" />
+
+            <div class="girl-name">🌸Гулбадан🌸</div>
+          </div>
+
+          <div class="girl">
+            <img class="girl-photo" src="images/girl5.jpg" alt="Girl 5" />
+
+            <div class="girl-name">🌸Амаль🌸</div>
+          </div>
+
+          <div class="girl">
+            <img class="girl-photo" src="images/girl6.jpg" alt="Girl 6" />
+
+            <div class="girl-name">🌸Дилназ🌸</div>
+          </div>
+
+          <div class="girl">
+            <img class="girl-photo" src="images/girl7.jpg" alt="Girl 7" />
+
+            <div class="girl-name">🌸Айгерим🌸</div>
+          </div>
+
+          <div class="girl">
+            <img class="girl-photo" src="images/girl8.jpg" alt="Girl 8" />
+
+            <div class="girl-name">🌸Айхан🌸</div>
+          </div>
+
+          <div class="girl">
+            <img class="girl-photo" src="images/girl9.jpg" alt="Girl 9" />
+
+            <div class="girl-name">🌸Сайкал🌸</div>
+          </div>
+
+          <div class="girl">
+            <img class="girl-photo" src="images/girl10.jpg" alt="Girl 10" />
+
+            <div class="girl-name">🌸Халиме🌸</div>
+          </div>
+
+          <div class="girl">
+            <img class="girl-photo" src="images/girl11.jpg" alt="Girl 11" />
+
+            <div class="girl-name">🌸Элина🌸</div>
+          </div>
+
+          <div class="girl">
+            <img class="girl-photo" src="images/girl12.jpg" alt="Girl 12" />
+
+            <div class="girl-name">🌸Нуриза🌸</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================
+         FINAL
+    ================================================= -->
+
+      <section class="final">
+        <div class="bows">
+          <div class="bow b1">
+            <i></i>
+
+            <span></span>
+
+            <span></span>
+          </div>
+
+          <div class="bow b4">
+            <i></i>
+
+            <span></span>
+
+            <span></span>
+          </div>
+
+          <div class="bow b6">
+            <i></i>
+
+            <span></span>
+
+            <span></span>
+          </div>
+        </div>
+
+        <h2>
+          See you
+          <br />
+
+          <em> there. </em>
+        </h2>
+
+        <p>
+          18 — только начало. И я очень хочу разделить этот момент именно с
+          вами.
+        </p>
+
+        <div class="final-small">01.09.2026 · MY 18TH</div>
+      </section>
+    </main>
+
+    <!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+    <script>
+      /* =====================================================
+   LOADER
+===================================================== */
+
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("pageLoader").classList.add("hide");
+        }, 1600);
+      });
+
+      /* =====================================================
+   BROKEN IMAGE FALLBACK
+===================================================== */
+
+      function markImageFallback(img) {
+        const wrap =
+          img.closest(".cover-photo, .dress-photo, .girl-photo") ||
+          img.parentElement;
+        if (wrap) wrap.classList.add("img-fallback");
+        img.style.display = "none";
+      }
+
+      document.querySelectorAll("img").forEach((img) => {
+        if (img.complete && img.naturalWidth === 0 && img.src) {
+          markImageFallback(img);
+        } else {
+          img.addEventListener("error", () => markImageFallback(img), {
+            once: true,
+          });
+        }
+      });
+
+      /* =====================================================
+   ENVELOPE INTRO
+===================================================== */
+
+      (function () {
+        const screen = document.getElementById("envelopeScreen");
+        const box = document.getElementById("envelopeBox");
+        const cover = document.getElementById("cover");
+        const transition = document.getElementById("transitionScreen");
+
+        if (!screen || !box || !cover) return;
+
+        let opened = false;
+
+        function openEnvelope() {
+          if (opened) return;
+          opened = true;
+
+          if (typeof window.ensureAudioCtx === "function") {
+            window.ensureAudioCtx();
+          }
+          if (typeof window.playOpenSound === "function") {
+            window.playOpenSound();
+          }
+
+          box.classList.add("opening");
+
+          setTimeout(() => {
+            if (transition) transition.classList.add("active");
+          }, 950);
+
+          setTimeout(() => {
+            screen.classList.add("closing");
+          }, 1150);
+
+          setTimeout(() => {
+            screen.classList.add("hidden");
+            cover.classList.add("revealed");
+            window.scrollTo(0, 0);
+          }, 1450);
+
+          setTimeout(() => {
+            if (transition) {
+              transition.classList.remove("active");
+            }
+          }, 2000);
+        }
+
+        box.addEventListener("click", openEnvelope);
+        box.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openEnvelope();
+          }
+        });
+        box.setAttribute("tabindex", "0");
+        box.setAttribute("role", "button");
+        box.setAttribute("aria-label", "Открыть конверт");
+      })();
+
+      /* =====================================================
+   PARTICLES
+===================================================== */
+
+      const particles = document.getElementById("particles");
+
+      for (let i = 0; i < 18; i++) {
+        const particle = document.createElement("div");
+
+        particle.className = "particle";
+
+        particle.style.left = Math.random() * 100 + "%";
+
+        particle.style.animationDuration = 8 + Math.random() * 10 + "s";
+
+        particle.style.animationDelay = Math.random() * 8 + "s";
+
+        const size = 1 + Math.random() * 3;
+
+        particle.style.width = size + "px";
+
+        particle.style.height = size + "px";
+
+        particles.appendChild(particle);
+      }
+
+      /* =====================================================
+               DRESS CODE ANIMATION
+            ===================================================== */
+
+      const dressPhotos = document.querySelectorAll(".dress-photo");
+
+      const dressObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.18,
+        },
+      );
+
+      dressPhotos.forEach((photo) => {
+        dressObserver.observe(photo);
+      });
+
+      /* =====================================================
+   COUNTDOWN
+===================================================== */
+
+      /*
+   ДАТА ПРАЗДНИКА
+
+   1 сентября 2026
+   17:00
+*/
+
+      const birthday = new Date("September 1, 2026 17:00:00").getTime();
+
+      let oldValues = {
+        days: "",
+
+        hours: "",
+
+        minutes: "",
+
+        seconds: "",
+      };
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+
+        const distance = birthday - now;
+
+        if (distance <= 0) {
+          setTime("days", "00");
+
+          setTime("hours", "00");
+
+          setTime("minutes", "00");
+
+          setTime("seconds", "00");
+
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        setTime("days", String(days).padStart(2, "0"));
+
+        setTime("hours", String(hours).padStart(2, "0"));
+
+        setTime("minutes", String(minutes).padStart(2, "0"));
+
+        setTime("seconds", String(seconds).padStart(2, "0"));
+      }
+
+      function setTime(id, value) {
+        const element = document.getElementById(id);
+
+        if (oldValues[id] !== value) {
+          element.classList.remove("changed");
+
+          void element.offsetWidth;
+
+          element.classList.add("changed");
+
+          element.textContent = value;
+
+          oldValues[id] = value;
+        }
+      }
+
+      updateCountdown();
+
+      setInterval(updateCountdown, 1000);
+
+      /* =====================================================
+   OPEN INVITATION
+===================================================== */
+
+      function openInvitation() {
+        const cover = document.getElementById("cover");
+
+        const invitation = document.getElementById("invitation");
+
+        const transition = document.getElementById("transitionScreen");
+
+        transition.classList.add("active");
+
+        setTimeout(() => {
+          cover.style.opacity = "0";
+
+          cover.style.transform = "scale(1.04)";
+        }, 350);
+
+        setTimeout(() => {
+          cover.style.display = "none";
+
+          invitation.classList.add("active");
+
+          window.scrollTo(0, 0);
+
+          revealElements();
+        }, 950);
+
+        setTimeout(() => {
+          transition.classList.remove("active");
+        }, 1500);
+      }
+
+      /* =====================================================
+   SCROLL REVEAL
+===================================================== */
+
+      const elements = document.querySelectorAll(".reveal");
+
+      function revealElements() {
+        elements.forEach((element) => {
+          const rect = element.getBoundingClientRect();
+
+          const visible = rect.top < window.innerHeight - 80;
+
+          if (visible) {
+            element.classList.add("visible");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", revealElements);
+
+      /* =====================================================
+   3D CARD EFFECT
+===================================================== */
+
+      const cards = document.querySelectorAll(
+        ".art-card, .location, .sleep-card",
+      );
+
+      cards.forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
+          if (window.matchMedia("(hover: none)").matches) {
+            return;
+          }
+
+          const rect = card.getBoundingClientRect();
+
+          const x = event.clientX - rect.left;
+
+          const y = event.clientY - rect.top;
+
+          const centerX = rect.width / 2;
+
+          const centerY = rect.height / 2;
+
+          const rotateX = ((y - centerY) / centerY) * -3;
+
+          const rotateY = ((x - centerX) / centerX) * 3;
+
+          card.style.transform = `
+                    perspective(800px)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                    translateY(-4px)
+                    `;
+        });
+
+        card.addEventListener("pointerleave", () => {
+          card.style.transform = "";
+        });
+      });
+
+      /* =====================================================
+   GIRL PHOTO CLICK
+===================================================== */
+
+      const girlPhotos = document.querySelectorAll(".girl-photo");
+
+      girlPhotos.forEach((photo) => {
+        photo.addEventListener("click", () => {
+          photo.style.transform = "scale(1.06)";
+
+          setTimeout(() => {
+            photo.style.transform = "";
+          }, 500);
+        });
+      });
+
+      /* =====================================================
+   PARALLAX BOWS
+===================================================== */
+
+      window.addEventListener("scroll", () => {
+        const scroll = window.scrollY;
+
+        document.querySelectorAll(".bow").forEach((bow, index) => {
+          const speed = 0.005 + (index % 3) * 0.003;
+
+          bow.style.marginTop = scroll * speed + "px";
+        });
+      });
+      /* =====================================================
+               APPLE STYLE — SCROLL ENGINE
+            ===================================================== */
+
+      (function () {
+        try {
+          const page = document.getElementById("invitation");
+
+          if (!page) return;
+
+          /* -----------------------------------------------
+                       Elements
+                    ------------------------------------------------ */
+
+          const sections = page.querySelectorAll(
+            ".section, .dress-code, .sleepover, .morning, .girls, .final",
+          );
+
+          /* -----------------------------------------------
+                       Scroll reveal
+                       (IntersectionObserver fires immediately for any
+                       target already inside the viewport at observe()
+                       time, so sections visible right after opening
+                       the invitation — like .final on short pages —
+                       reveal correctly without waiting for a scroll
+                       event.)
+                    ------------------------------------------------ */
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("visible");
+                }
+              });
+            },
+            {
+              threshold: 0.12,
+              rootMargin: "0px 0px -8% 0px",
+            },
+          );
+
+          sections.forEach((section) => {
+            observer.observe(section);
+          });
+
+          /* -----------------------------------------------
+                       Scroll-driven text movement
+                    ------------------------------------------------ */
+
+          let ticking = false;
+
+          function updateScroll() {
+            const viewport = window.innerHeight;
+
+            sections.forEach((section) => {
+              const rect = section.getBoundingClientRect();
+
+              const center = rect.top + rect.height / 2;
+
+              const distance = (center - viewport / 2) / viewport;
+
+              /*
+                                   Очень маленькое движение.
+                                   Именно поэтому ощущается
+                                   дорого, а не как эффект.
+                                */
+
+              const offset = Math.max(-18, Math.min(18, distance * -8));
+
+              const title = section.querySelector(
+                ".section-title, .dress-title, h2",
+              );
+
+              if (title) {
+                title.style.setProperty("--text-offset", offset + "px");
+              }
+            });
+
+            ticking = false;
+          }
+
+          window.addEventListener(
+            "scroll",
+            () => {
+              if (!ticking) {
+                window.requestAnimationFrame(updateScroll);
+
+                ticking = true;
+              }
+            },
+            {
+              passive: true,
+            },
+          );
+
+          updateScroll();
+
+          /* -----------------------------------------------
+                       Smooth image depth
+                    ------------------------------------------------ */
+
+          const images = page.querySelectorAll(".dress-photo img, .girl-photo");
+
+          function updateImages() {
+            const viewport = window.innerHeight;
+
+            images.forEach((img) => {
+              const rect = img.getBoundingClientRect();
+
+              if (rect.bottom < 0 || rect.top > viewport) {
+                return;
+              }
+
+              const progress = (viewport - rect.top) / (viewport + rect.height);
+
+              const movement = (progress - 0.5) * -12;
+
+              img.style.translate = `0 ${movement}px`;
+            });
+          }
+
+          let imageTick = false;
+
+          window.addEventListener(
+            "scroll",
+            () => {
+              if (!imageTick) {
+                requestAnimationFrame(() => {
+                  updateImages();
+
+                  imageTick = false;
+                });
+
+                imageTick = true;
+              }
+            },
+            {
+              passive: true,
+            },
+          );
+        } catch (err) {
+          console.error("Apple scroll engine failed:", err);
+        }
+      })();
+    </script>
+    <!-- =====================================================
+             DRESS CODE PHOTO VIEWER
+        ===================================================== -->
+
+    <div
+      class="dress-lightbox"
+      id="dressLightbox"
+      onclick="closeDressPhoto(event)"
+    >
+      <button
+        class="dress-lightbox-close"
+        onclick="closeDressPhoto(event)"
+        aria-label="Закрыть"
+      >
+        ×
+      </button>
+
+      <img id="dressLightboxImage" src="" alt="Dress Code" />
+
+      <div class="dress-lightbox-hint">Нажми в сторону, чтобы закрыть</div>
+    </div>
+
+    <script>
+      function openDressPhoto(photo) {
+        const image = photo.querySelector("img");
+
+        const lightbox = document.getElementById("dressLightbox");
+
+        const lightboxImage = document.getElementById("dressLightboxImage");
+
+        lightboxImage.src = image.src;
+
+        lightboxImage.alt = image.alt;
+
+        lightbox.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeDressPhoto(event) {
+        /*
+               Если нажали прямо
+               на большую фотографию —
+               не закрываем.
+            */
+
+        if (event && event.target.id === "dressLightboxImage") {
+          return;
+        }
+
+        const lightbox = document.getElementById("dressLightbox");
+
+        lightbox.classList.remove("active");
+
+        document.body.style.overflow = "";
+      }
+
+      /* Можно закрыть кнопкой
+           ESC на компьютере */
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          const lightbox = document.getElementById("dressLightbox");
+
+          if (lightbox.classList.contains("active")) {
+            closeDressPhoto();
+          }
+        }
+      });
+    </script>
+
+    <!-- =====================================================
+             WOW ANIMATIONS ENGINE
+             (letter reveal + ripple + progress bar + heart burst)
+        ===================================================== -->
+
+    <script>
+      (function () {
+        "use strict";
+
+        const prefersReduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        /* -----------------------------------------------
+                   0. SOUND ENGINE
+                   Tiny Web Audio synth — no external files needed.
+                   Muted by default until the user taps the sound
+                   toggle (browsers block autoplay before a gesture
+                   anyway). Preference is remembered for next visit.
+                ------------------------------------------------ */
+
+        let audioCtx = null;
+        let soundOn = false;
+
+        try {
+          soundOn = localStorage.getItem("inviteSound") === "on";
+        } catch (e) {
+          soundOn = false;
+        }
+
+        function ensureAudioCtx() {
+          if (!audioCtx) {
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if (AC) audioCtx = new AC();
+          }
+          if (audioCtx && audioCtx.state === "suspended") {
+            audioCtx.resume();
+          }
+          return audioCtx;
+        }
+
+        function tone(freq, startTime, duration, opts) {
+          const ctx = audioCtx;
+          if (!ctx) return;
+          const settings = opts || {};
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc.type = settings.type || "sine";
+          osc.frequency.setValueAtTime(freq, startTime);
+
+          if (settings.glideTo) {
+            osc.frequency.exponentialRampToValueAtTime(
+              settings.glideTo,
+              startTime + duration,
+            );
+          }
+
+          const peak = settings.volume || 0.12;
+          gain.gain.setValueAtTime(0.0001, startTime);
+          gain.gain.exponentialRampToValueAtTime(
+            peak,
+            startTime + Math.min(0.03, duration * 0.3),
+          );
+          gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start(startTime);
+          osc.stop(startTime + duration + 0.05);
+        }
+
+        function playOpenSound() {
+          if (!soundOn) return;
+          const ctx = ensureAudioCtx();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+          // soft rising "pop" — like a gentle envelope opening
+          tone(340, now, 0.22, {
+            type: "sine",
+            glideTo: 620,
+            volume: 0.1,
+          });
+          tone(880, now + 0.08, 0.2, {
+            type: "sine",
+            volume: 0.05,
+          });
+        }
+
+        function playTapClick() {
+          if (!soundOn) return;
+          const ctx = ensureAudioCtx();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+          tone(520, now, 0.07, { type: "sine", volume: 0.05 });
+        }
+
+        function playChime() {
+          if (!soundOn) return;
+          const ctx = ensureAudioCtx();
+          if (!ctx) return;
+          const now = ctx.currentTime;
+          // small bell-like arpeggio, like sparkle chimes
+          const notes = [784, 988, 1175, 1568];
+          notes.forEach((freq, i) => {
+            tone(freq, now + i * 0.11, 0.55, {
+              type: "sine",
+              volume: 0.06,
+            });
+          });
+        }
+
+        window.ensureAudioCtx = ensureAudioCtx;
+        window.playOpenSound = playOpenSound;
+        window.playChime = playChime;
+
+        function setSoundState(next) {
+          soundOn = next;
+          try {
+            localStorage.setItem("inviteSound", soundOn ? "on" : "off");
+          } catch (e) {
+            /* storage may be unavailable — ignore */
+          }
+
+          const icon = document.getElementById("soundIcon");
+          const btn = document.getElementById("soundToggle");
+          if (icon) icon.textContent = soundOn ? "🔊" : "🔇";
+          if (btn) {
+            btn.setAttribute("aria-pressed", soundOn ? "true" : "false");
+            btn.setAttribute(
+              "aria-label",
+              soundOn ? "Выключить звук" : "Включить звук",
+            );
+            btn.classList.remove("just-toggled");
+            void btn.offsetWidth;
+            btn.classList.add("just-toggled");
+          }
+        }
+
+        const soundToggleBtn = document.getElementById("soundToggle");
+        if (soundToggleBtn) {
+          setSoundState(soundOn);
+          soundToggleBtn.addEventListener("click", () => {
+            ensureAudioCtx();
+            const turningOn = !soundOn;
+            setSoundState(turningOn);
+            if (turningOn) playTapClick();
+          });
+        }
+
+        /* -----------------------------------------------
+                   1. SPLIT TEXT INTO ANIMATED CHARACTERS
+                   Walks each target element's child nodes,
+                   wraps every visible character in its own
+                   <span class="split-char">, and leaves existing
+                   tags (like <em>, <span>, <br>) untouched so
+                   colors/italics keep working.
+                ------------------------------------------------ */
+
+        function splitNode(node, counterRef) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            const frag = document.createDocumentFragment();
+            const text = node.textContent;
+
+            for (const ch of text) {
+              if (ch === " ") {
+                frag.appendChild(document.createTextNode(" "));
+                continue;
+              }
+
+              const span = document.createElement("span");
+              span.className = "split-char";
+              span.textContent = ch;
+              span.style.setProperty(
+                "--char-delay",
+                counterRef.i * 0.028 + "s",
+              );
+              counterRef.i++;
+              frag.appendChild(span);
+            }
+
+            node.parentNode.replaceChild(frag, node);
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            Array.from(node.childNodes).forEach((child) =>
+              splitNode(child, counterRef),
+            );
+          }
+        }
+
+        function prepareSplitText(el) {
+          if (el.dataset.split === "done") return;
+          el.dataset.split = "done";
+          el.classList.add("split-text");
+
+          const counterRef = { i: 0 };
+          Array.from(el.childNodes).forEach((child) =>
+            splitNode(child, counterRef),
+          );
+        }
+
+        const splitTargets = document.querySelectorAll(
+          [
+            ".event-intro h1",
+            ".section-title",
+            ".dress-title",
+            ".sleepover h2",
+            ".morning h2",
+            ".girls h2",
+            ".final h2",
+            ".art-card h3",
+            ".location h3",
+          ].join(", "),
+        );
+
+        splitTargets.forEach(prepareSplitText);
+
+        if (prefersReduced) {
+          document
+            .querySelectorAll(".split-text")
+            .forEach((el) => el.classList.add("split-in-view"));
+        } else if ("IntersectionObserver" in window) {
+          const splitObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("split-in-view");
+                  splitObserver.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.35, rootMargin: "0px 0px -6% 0px" },
+          );
+
+          document
+            .querySelectorAll(".split-text")
+            .forEach((el) => splitObserver.observe(el));
+        } else {
+          document
+            .querySelectorAll(".split-text")
+            .forEach((el) => el.classList.add("split-in-view"));
+        }
+
+        /* Re-check the hero title right after the cover
+                   opens, since it may already be in view before
+                   any scroll happens. */
+        const heroTitle = document.querySelector(".event-intro h1");
+        const originalOpen = window.openInvitation;
+        if (typeof originalOpen === "function") {
+          window.openInvitation = function () {
+            ensureAudioCtx();
+            playOpenSound();
+            originalOpen();
+            setTimeout(() => {
+              if (heroTitle) {
+                heroTitle.classList.add("split-in-view");
+              }
+            }, 650);
+          };
+        }
+
+        /* -----------------------------------------------
+                   2. SCROLL PROGRESS BAR
+                ------------------------------------------------ */
+
+        const progressBar = document.getElementById("scrollProgress");
+
+        function updateProgress() {
+          const doc = document.documentElement;
+          const scrollTop = doc.scrollTop || document.body.scrollTop;
+          const scrollHeight =
+            (doc.scrollHeight || document.body.scrollHeight) - doc.clientHeight;
+          const pct =
+            scrollHeight > 0
+              ? Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100))
+              : 0;
+          if (progressBar) progressBar.style.width = pct + "%";
+        }
+
+        window.addEventListener("scroll", updateProgress, {
+          passive: true,
+        });
+        updateProgress();
+
+        /* -----------------------------------------------
+                   3. TAP RIPPLE + PULSE ON BUTTONS
+                ------------------------------------------------ */
+
+        const tapTargets = document.querySelectorAll(
+          ".open-button, .map-button, .dress-photo, .girl-photo",
+        );
+
+        tapTargets.forEach((el) => {
+          el.classList.add("ripple-surface");
+
+          el.addEventListener(
+            "pointerdown",
+            (e) => {
+              const rect = el.getBoundingClientRect();
+              const size = Math.max(rect.width, rect.height) * 1.6;
+              const dot = document.createElement("span");
+              dot.className = "ripple-dot";
+
+              const originX =
+                (e.clientX ?? rect.left + rect.width / 2) - rect.left;
+              const originY =
+                (e.clientY ?? rect.top + rect.height / 2) - rect.top;
+
+              dot.style.width = dot.style.height = size + "px";
+              dot.style.left = originX - size / 2 + "px";
+              dot.style.top = originY - size / 2 + "px";
+
+              el.appendChild(dot);
+              setTimeout(() => dot.remove(), 720);
+
+              el.classList.remove("tap-pulse");
+              void el.offsetWidth;
+              el.classList.add("tap-pulse");
+              playTapClick();
+            },
+            { passive: true },
+          );
+        });
+
+        /* -----------------------------------------------
+                   4. HEART BURST WHEN THE FINAL SECTION ARRIVES
+                ------------------------------------------------ */
+
+        const heartLayer = document.getElementById("heartBurst");
+        const finalSection = document.querySelector(".final");
+        const heartSymbols = ["♥", "♡", "✦"];
+        let heartsFired = false;
+
+        function fireHearts() {
+          if (heartsFired || !heartLayer) return;
+          heartsFired = true;
+          playChime();
+
+          const count = 18;
+          for (let i = 0; i < count; i++) {
+            setTimeout(() => {
+              const piece = document.createElement("span");
+              piece.className = "heart-piece";
+              piece.textContent =
+                heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+              piece.style.left = Math.random() * 100 + "%";
+              piece.style.fontSize = 12 + Math.random() * 16 + "px";
+              piece.style.setProperty(
+                "--drift",
+                (Math.random() * 120 - 60).toFixed(0) + "px",
+              );
+              piece.style.setProperty(
+                "--spin",
+                (Math.random() * 360 - 180).toFixed(0) + "deg",
+              );
+              piece.style.animationDuration = 2.2 + Math.random() * 1.6 + "s";
+              heartLayer.appendChild(piece);
+              setTimeout(() => piece.remove(), 4200);
+            }, i * 90);
+          }
+        }
+
+        if (finalSection) {
+          if (prefersReduced) {
+            // skip decorative burst for reduced-motion users
+          } else if ("IntersectionObserver" in window) {
+            const finalObserver = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    fireHearts();
+                    finalObserver.disconnect();
+                  }
+                });
+              },
+              { threshold: 0.5 },
+            );
+            finalObserver.observe(finalSection);
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
